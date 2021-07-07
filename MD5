@@ -1,0 +1,9 @@
+f0d476429f0d0492ff88d0a7353bb15c *DESCRIPTION
+b128867c7c71e3ebeb36489b41b4f446 *LICENSE
+aad5b838b7ba15a21b0f985d20e8b130 *NAMESPACE
+0cfc33a1c18643c161b7533ebbdb7e37 *R/katex.R
+864342db4253aaa6f6474abc24e68f9b *R/rd.R
+39d435993bd31aba37ebea4b25fef80e *build/partial.rdb
+2168fcd6da0df582a92607bb2db54e17 *inst/js/katex.min.js
+8bc1c021cb5cf21779a832ce03127f07 *man/katex.Rd
+d503d0af0031c754fa734fdfbe6dcf00 *man/math_to_rd.Rd
