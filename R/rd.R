@@ -36,6 +36,16 @@
 #' If no ascii representation is given, the input tex in displayed verbatim into the
 #' plain-text documentation.
 #'
+#' # Note for Windows
+#'
+#' R versions before 4.1.1 had a [bug on Windows](https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18152)
+#' which could lead to incorrect HTML characters for `\Sexpr{}` output.
+#' This bug hits when the source package gets built on Windows (i.e. when
+#' html manual pages are generated for `\Sexpr{}` with `stage=build`).
+#' Therefore, package developers on Windows should preferably use R 4.1.1
+#' or later to build and release source packages containing `\Sexpr{}` code.
+#' Linux and MacOS are unaffected.
+#'
 #' @export
 #' @name math_to_rd
 #' @rdname math_to_rd
@@ -50,5 +60,10 @@ math_to_rd <- function(tex, ascii = tex, displayMode = TRUE, ..., include_css = 
   html_out <- paste('\\if{html}{\\out{', html, '}}', sep = '\n')
   latex_out <- paste('\\if{latex,text}{', ifelse(displayMode, '\\deqn{', '\\eqn{'),
                      tex, '}{', ascii, '}}', sep = '\n')
-  paste(html_out, latex_out, sep = '\n')
+  rd <- paste(html_out, latex_out, sep = '\n')
+  if(identical(.Platform$OS.type, 'windows') && getRversion() < '4.1.1'){
+    # https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18152
+    rd <- enc2native(rd)
+  }
+  structure(rd, class = 'Rdtext')
 }
