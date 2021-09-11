@@ -38,13 +38,10 @@
 #'
 #' # Note for Windows
 #'
-#' R versions before 4.1.1 had a [bug on Windows](https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18152)
-#' which could lead to incorrect HTML characters for `\Sexpr{}` output.
-#' This bug hits when the source package gets built on Windows (i.e. when
-#' html manual pages are generated for `\Sexpr{}` with `stage=build`).
-#' Therefore, package developers on Windows should preferably use R 4.1.1
-#' or later to build and release source packages containing `\Sexpr{}` code.
-#' Linux and MacOS are unaffected.
+#' On Windows, R versions before 4.1.2 had a [bug](https://bugs.r-project.org/show_bug.cgi?id=18152)
+#' which could lead to incorrect HTML encoding for `\Sexpr{}` output.
+#' As a workaround, we automatically escape non-ascii html characters
+#' on these versions of R. Linux and MacOS are unaffected.
 #'
 #' @export
 #' @name math_to_rd
@@ -61,9 +58,9 @@ math_to_rd <- function(tex, ascii = tex, displayMode = TRUE, ..., include_css = 
   latex_out <- paste('\\if{latex,text}{', ifelse(displayMode, '\\deqn{', '\\eqn{'),
                      tex, '}{', ascii, '}}', sep = '\n')
   rd <- paste(html_out, latex_out, sep = '\n')
-  if(identical(.Platform$OS.type, 'windows') && getRversion() < '4.1.1'){
-    # https://bugs.r-project.org/bugzilla/show_bug.cgi?id=18152
-    rd <- enc2native(rd)
+  if(identical(.Platform$OS.type, 'windows') && getRversion() < '4.1.2'){
+    # https://bugs.r-project.org/show_bug.cgi?id=18152
+    rd <- ctx$call('escape_utf8', rd)
   }
   structure(rd, class = 'Rdtext')
 }
