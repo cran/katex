@@ -1,9 +1,10 @@
 Package: katex
 Type: Package
 Title: Rendering Math to HTML, 'MathML', or R-Documentation Format
-Version: 1.4.0
-Authors@R: person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroen@berkeley.edu",
-    comment = c(ORCID = "0000-0002-4035-0289"))
+Version: 1.4.1
+Authors@R: c(person("Jeroen", "Ooms", role = c("aut", "cre"), email = "jeroen@berkeley.edu",
+    comment = c(ORCID = "0000-0002-4035-0289")),
+    person("Khan Academy and other contributors", role = "cph", comment="KaTeX JavaScript library"))
 Description: Convert latex math expressions to HTML and 'MathML' for use in 
     markdown documents or package manual pages. The rendering is done in 
     R using the V8 engine (i.e. server-side), which eliminates the need 
@@ -16,13 +17,14 @@ URL: https://docs.ropensci.org/katex/,
         https://katex.org/docs/options.html (upstream)
 BugReports: https://github.com/ropensci/katex/issues
 Encoding: UTF-8
-RoxygenNote: 7.1.2
+RoxygenNote: 7.2.1
 Imports: V8
 VignetteBuilder: knitr
 Suggests: knitr, rmarkdown
 NeedsCompilation: no
-Packaged: 2022-02-08 22:11:07 UTC; jeroen
-Author: Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>)
+Packaged: 2022-11-28 13:14:52 UTC; jeroen
+Author: Jeroen Ooms [aut, cre] (<https://orcid.org/0000-0002-4035-0289>),
+  Khan Academy and other contributors [cph] (KaTeX JavaScript library)
 Maintainer: Jeroen Ooms <jeroen@berkeley.edu>
 Repository: CRAN
-Date/Publication: 2022-02-08 22:30:02 UTC
+Date/Publication: 2022-11-28 14:00:02 UTC
